@@ -49,7 +49,7 @@ export default function LoginPage() {
 
     const getInputClassName = (isValid) => {
         if (isValid === null) return "block w-full p-2.5 mt-2 bg-gray-50 border border-gray-300 text-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white";
-            return isValid ? "block w-full p-2.5 mt-2 border border-green-500 text-green-500" : "block w-full p-2.5 mt-2 border border-red-500 text-red-500";
+            return isValid ? "block w-full p-2.5 mt-2 border-2 border-green-500 text-green-500" : "block w-full p-2.5 mt-2 border-2 border-red-500 text-red-500";
     };
 
     return (
@@ -98,7 +98,7 @@ export default function LoginPage() {
                             </Label>
                         </div>
                     </div>
-                    <Link to="/forgot-password" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
+                    <Link to="/reset-password" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
                         Forgot password?
                     </Link>
                 </div>
