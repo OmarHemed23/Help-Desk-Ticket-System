@@ -1,4 +1,7 @@
 # Help Desk System
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5bb1a5c23c4643b4bc076708c7dcfade)](https://app.codacy.com/gh/OmarHemed23/Help-Desk-Ticket-System?utm_source=github.com&utm_medium=referral&utm_content=OmarHemed23/Help-Desk-Ticket-System&utm_campaign=Badge_Grade)
+
 The Help Desk System is designed to optimize customer support operations by providing a streamlined platform for managing and resolving support tickets. 
 ## Key features include:
 + Ticket Management: Track, assign, and resolve customer inquiries efficiently.
