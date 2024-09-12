@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Logo from "../../images/logo.jpg";
 import SidebarItems from "./SidebarItems";
 
@@ -23,7 +22,7 @@ export default function Sidebar ({ collapsed, setCollapsed, showingSidebar }) {
     return (
         <aside 
             className={`
-            bg-white dark:bg-gray-800 text-gray-900 dark:text-white z-50 h-screen transition-all duration-300 ease-in-out fixed md:static md:translate-x-0
+            bg-white dark:bg-gray-800 text-gray-900 dark:text-white z-50 h-full transition-all duration-300 ease-in-out fixed md:static md:translate-x-0
             ${!collapsed ? "w-[300px]" : "w-16"}
             ${showingSidebar ? "translate-x-0" : "-translate-x-full"}
             `}
