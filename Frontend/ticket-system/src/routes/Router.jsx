@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { useNavigate,useLocation,createBrowserRouter, Navigate } from "react-router-dom";
 import LoginPage from "../pages/auth/LoginPage";
 import RegistrationPage from "../pages/auth/RegistrationPage";
 import GuestLayout from "../layout/GuestLayout";
@@ -42,6 +42,10 @@ const Router = createBrowserRouter([
             { path: "dashboard", element: <UserDashboardPage /> },
         ],
     },
+    {
+        path: "/",
+        element: [<Navigate to="/user/dashboard" replace />]
+    }
 ]);
 
 export default Router;
