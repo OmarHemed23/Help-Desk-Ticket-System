@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Badge from "../../components/ui/Badge";
 import Table1 from "../../components/data-display/Table1";
 import Dropdown from "../../components/ui/Dropdown";
+import VerticalStepper from "../../components/navigation/VerticalStepper";
+import SearchInput from "../../components/form/SearchInput";
+
 
 const statusColors = {
     Pending: "bg-yellow-500",
@@ -25,7 +29,7 @@ const columns = [
         label: "Priority", 
         accessor: "priority",
         render: (priority) => (
-            <td className={`${priorityColors[priority]}`}>{priority}</td>
+            <span className={`${priorityColors[priority]}`}>{priority}</span>
         ),
     },
     { label: "Issued", accessor: "issued" },
@@ -38,12 +42,12 @@ const columns = [
             const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             return (
-                <td>
+                <span>
                     <div className="flex flex-col">
                         <span>{formattedDate}</span>
                         <span className="text-gray-500 text-sm">{formattedTime}</span>
                     </div>
-                </td>
+                </span>
             );
         },
     },
@@ -145,7 +149,7 @@ export default function UserDashboardPage() {
                     <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                         Pending Actions
                     </h2>
-                    <p className="text-3xl font-bold text-red-600">
+                    <p className="text-3xl font-bold text-yellow-600">
                         {data.filter(ticket => ticket.status === "Pending").length}
                     </p>
                     <Link to="/user/pending-actions" className="text-sm text-gray-500 hover:text-blue-600">
@@ -175,8 +179,8 @@ export default function UserDashboardPage() {
             </section>
 
             <section className="grid grid-cols-1 p-2 gap-4 mb-4">
-                <div class="p-4 mb-4 space-y-6 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                    <div class="flex justify-between text-gray-900 dark:text-white px-4 py-2 rounded-lg">
+                <div className="bg-white border border-gray-200 rounded-lg shadow-md 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                    <div className="flex justify-between text-gray-900 dark:text-white px-4 py-2">
                         <div className="flex items-start">
                             <h3>
                                 Recent Tickets
@@ -188,53 +192,103 @@ export default function UserDashboardPage() {
                             </Link>
                         </div>
                     </div>
-                    <div class="text-gray-400">
-                        <Table1 columns={columns} data={filteredData} />
-                    </div>
+                    <Table1 columns={columns} data={filteredData} />
                     <div className="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
-                        <Dropdown>
-                            <Dropdown.Trigger>
-                                <button type="button" className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                                    {selectedRange}
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 ml-2 text-gray-900 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </button>
-                            </Dropdown.Trigger>
-                            <Dropdown.Content 
-                                align="left" 
-                                heightClasses="max-h-48 overflow-y-auto" 
-                                contentClasses="text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                                width="48"
-                            >
-                                <ul className="py-1">
-                                    <li>
-                                        <Dropdown.Link to="#" onClick={() => setSelectedRange("Last 7 days")}>
+                        <Menu>
+                            <MenuButton className="inline-flex items-center py-3 px-4 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                                {selectedRange}
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 ml-2 text-gray-900 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </MenuButton>
+                            <MenuItems anchor="bottom start" className="z-50 my-4 w-56 text-base bg-white rounded shadow dark:bg-gray-700">
+                                <ul className="py-1 list-none divide-y divide-gray-100 dark:divide-gray-600">
+                                    <MenuItem>
+                                        <Link onClick={() => setSelectedRange("Last 7 days")} className="block w-full py-2 px-4 text-start text-sm leading-5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                             Last 7 days
-                                        </Dropdown.Link>
-                                    </li>
-                                    <li>
-                                        <Dropdown.Link to="#" onClick={() => setSelectedRange("Last 30 days")}>
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <Link onClick={() => setSelectedRange("Last 30 days")} className="block w-full py-2 px-4 text-start text-sm leading-5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                             Last 30 days
-                                        </Dropdown.Link>
-                                    </li>
-                                    <li>
-                                        <Dropdown.Link to="#" onClick={() => setSelectedRange("Last 90 days")}>
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <Link onClick={() => setSelectedRange("Last 90 days")} className="block w-full py-2 px-4 text-start text-sm leading-5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                             Last 90 days
-                                        </Dropdown.Link>
-                                    </li>
-                                    <li>
-                                        <Dropdown.Link to="#" onClick={() => setSelectedRange("All")}>
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <Link onClick={() => setSelectedRange("All")} className="block w-full py-2 px-4 text-start text-sm leading-5 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                                             All
-                                        </Dropdown.Link>
-                                    </li>
+                                        </Link>
+                                    </MenuItem>
                                 </ul>
-                            </Dropdown.Content>
-                        </Dropdown>
+                            </MenuItems>
+                        </Menu>
                     </div>
+                </div>
+            </section>
+            <section className="grid grid-cols-1 lg:grid-cols-6 p-2 gap-4 mb-4">
+                <div className="flex flex-col lg:col-span-4 p-4 sm:p-6 bg-white border border-gray-200 dark:border-gray-700 dark:bg-gray-800 shadow-md rounded-lg">
+                    <div className="flex-row md:flex justify-between text-gray-900 border-b border-gray-200 dark:border-gray-700 dark:text-white px-4 py-2">
+                        <div className="flex mb-4 items-start md:mb-0">
+                            <h3>
+                                Activity Breakdown
+                            </h3>
+                        </div>
+                        <div className="flex items-end">
+                            <SearchInput className="w-full" placeholder="Search Ticket"/>
+                        </div>
+                    </div>
+                    <div className="px-4 mt-5 h-[350px] overflow-y-auto">
+                        <VerticalStepper />
+                    </div>
+                </div>
+                <div className="flex flex-col lg:col-span-2 sm:p-6  bg-white border border-gray-200 dark:border-gray-700 dark:bg-gray-800 shadow-md rounded-lg">
+                    <div className="flex justify-between border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-2">
+                        <div className="flex items-start">
+                            <h3>
+                                FAQs
+                            </h3>
+                        </div>
+                    </div>
+                    <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                        <li className="hover:bg-gray-100 dark:hover:bg-gray-900">
+                            <Link to="">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                            How to save energy while using computer?
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </li>
+                        <li className="hover:bg-gray-100 dark:hover:bg-gray-900">
+                            <Link to="">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                            How to restart network adapter?
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
             </section>
         </>
     );
 }
-
