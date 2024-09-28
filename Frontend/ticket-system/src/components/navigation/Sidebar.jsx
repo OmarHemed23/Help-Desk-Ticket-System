@@ -23,7 +23,7 @@ export default function Sidebar ({ collapsed, setCollapsed, showingSidebar }) {
         <aside 
             className={`
             bg-white dark:bg-gray-800 text-gray-900 dark:text-white z-50 h-full transition-all duration-300 ease-in-out fixed md:static md:translate-x-0
-            ${!collapsed ? "w-[300px]" : "w-16"}
+            ${!collapsed && "w-[250px] md:w-[300px]"}
             ${showingSidebar ? "translate-x-0" : "-translate-x-full"}
             `}
         >
