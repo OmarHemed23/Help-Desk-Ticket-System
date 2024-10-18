@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Badge from "../../components/ui/Badge";
 import Table1 from "../../components/data-display/Table1";
-import Dropdown from "../../components/ui/Dropdown";
 import VerticalStepper from "../../components/navigation/VerticalStepper";
 import SearchInput from "../../components/form/SearchInput";
 
