@@ -1,4 +1,4 @@
-import { useNavigate,useLocation,createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import LoginPage from "../pages/auth/LoginPage";
 import RegistrationPage from "../pages/auth/RegistrationPage";
 import GuestLayout from "../layout/GuestLayout";
@@ -7,6 +7,7 @@ import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
 import OtpPage from "../pages/auth/OtpPage";
 import AuthenticatedLayout from "../layout/AuthenticatedLayout";
 import UserDashboardPage from "../pages/user/UserDashboardPage";
+import NewTicketPage from "../pages/user/NewTicketPage";
 
 const Router = createBrowserRouter([
     {
@@ -40,6 +41,7 @@ const Router = createBrowserRouter([
         element: <AuthenticatedLayout />,
         children: [
             { path: "dashboard", element: <UserDashboardPage /> },
+            { path: "new-ticket", element: <NewTicketPage />}
         ],
     },
     {
