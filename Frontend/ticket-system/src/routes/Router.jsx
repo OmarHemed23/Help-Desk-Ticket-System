@@ -8,6 +8,7 @@ import OtpPage from "../pages/auth/OtpPage";
 import AuthenticatedLayout from "../layout/AuthenticatedLayout";
 import UserDashboardPage from "../pages/user/UserDashboardPage";
 import NewTicketPage from "../pages/user/NewTicketPage";
+import MyTicketsPage from "../pages/user/MyTicketsPage";
 
 const Router = createBrowserRouter([
     {
@@ -41,7 +42,8 @@ const Router = createBrowserRouter([
         element: <AuthenticatedLayout />,
         children: [
             { path: "dashboard", element: <UserDashboardPage /> },
-            { path: "new-ticket", element: <NewTicketPage />}
+            { path: "new-ticket", element: <NewTicketPage />},
+            { path: "my-tickets", element: <MyTicketsPage />},
         ],
     },
     {
