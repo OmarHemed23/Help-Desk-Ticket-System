@@ -191,7 +191,11 @@ export default function UserDashboardPage() {
                             </Link>
                         </div>
                     </div>
-                    <Table1 columns={columns} data={filteredData} />
+                    <div className="overflow-x-auto">
+                        <div className="h-48 hover:overflow-y-auto">
+                            <Table1 columns={columns} data={filteredData} className="table-fixed" />
+                        </div>
+                    </div>
                     <div className="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
                         <Menu>
                             <MenuButton className="inline-flex items-center py-3 px-4 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
