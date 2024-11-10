@@ -3,6 +3,7 @@ import { useLocation,Link } from "react-router-dom";
 const routeTitles = {
     "/user/dashboard": "User Dashboard",
     "/user/new-ticket": "New Ticket",
+    "/user/my-tickets": "My Tickets",
 };
 
 export default function Breadcrumb() {
